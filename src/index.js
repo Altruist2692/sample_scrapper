@@ -1,4 +1,5 @@
 const setup = require('./starter-kit/setup');
+const Database = require('database-js').Connection;
 
 exports.handler = async (event, context, callback) => {
   // For keeping the browser launch
@@ -13,20 +14,12 @@ exports.handler = async (event, context, callback) => {
 };
 
 exports.run = async (browser) => {
-  // implement here
-  // this is sample
   const page = await browser.newPage();
   await page.goto('https://www.thestorefront.com/spaces/united-states/new-york/new-york/28331-boutique-in-trendy-nolita',
   );
-  // console.log((await page.content()).slice(0, 500));
 
-  // await page.type('#lst-ib', 'aaaaa');
-  // avoid to timeout waitForNavigation() after click()
   await Promise.all([
-    // avoid to
-    // 'Cannot find context with specified id undefined' for localStorage
     page.waitForSelector('.title'),
-    // page.click('[name=btnK]'),
   ]);
 
 /* screenshot
@@ -46,16 +39,6 @@ exports.run = async (browser) => {
     Body: screenshot,
   }).promise();
 */
-  // console.log()
-  // cookie and localStorage
-  // await page.setCookie({name: 'name', value: 'cookieValue'});
-  // console.log(await page.cookies());
-  // console.log(await page.evaluate(() => {
-  //   localStorage.setItem('name', 'localStorageValue');
-  //   return localStorage.getItem('name');
-  // }));
-
-  //title
   const title = await page.$eval('h1.title', element => element.textContent);
   console.log(title)
 
@@ -87,7 +70,23 @@ exports.run = async (browser) => {
 
   const imgs = await page.evaluate(() => Array.from(document.querySelectorAll('div.sf-carousel.ng-isolate-scope .image'), (element) => { return getComputedStyle(element).backgroundImage.replace('url\(', '').replace(/\"/g, '').replace('\)', '') }));
   console.log(imgs)
-  
+
+  // Sample database connection and retrival. Same way can do rest of the operations
+  (async () => {
+      let connection, statement, rows;
+      connection = new Database('database-js-postgres://postgres:root@localhost:5432/popup_dev');
+
+      try {
+          statement = await connection.prepareStatement("SELECT * FROM scrapped_listings");
+          rows = await statement.query();
+          console.log(rows);
+      } catch (error) {
+          console.log(error);
+      } finally {
+          await connection.close();
+      }
+  })();
+
   await page.close();
   return 'done';
 };
