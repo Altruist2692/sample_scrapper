@@ -10,31 +10,16 @@ exports.run = async (browser) => {
     page.waitForSelector('.title'),
   ]);
 
-/* screenshot
-  await page.screenshot({path: '/tmp/screenshot.png'});
-  const aws = require('aws-sdk');
-  const s3 = new aws.S3({apiVersion: '2006-03-01'});
-  const fs = require('fs');
-  const screenshot = await new Promise((resolve, reject) => {
-    fs.readFile('/tmp/screenshot.png', (err, data) => {
-      if (err) return reject(err);
-      resolve(data);
-    });
-  });
-  await s3.putObject({
-    Bucket: '<bucket name>',
-    Key: 'screenshot.png',
-    Body: screenshot,
-  }).promise();
-*/
+  const data = {}
+
   const title = await page.$eval('h1.title', element => element.textContent);
-  console.log(title)
+  data["title"] = title
 
   const pricingValue = await page.$eval('span.pricing-value', element => element.textContent);
-  console.log('Pricing Value: ' + pricingValue)
+  data["pricingValue"] = pricingValue
 
   const location = await page.$eval('h2.location', element => element.textContent);
-  console.log('Location' + location)
+  data["location"] = location
 
   const infoTitle= await page.evaluate(() => Array.from(document.querySelectorAll('div.listing-details-panel .listing-information .title'), element => element.textContent));
   const infoValue = await page.evaluate(() => Array.from(document.querySelectorAll('div.listing-details-panel .listing-information .information'), element => element.textContent));
@@ -42,23 +27,24 @@ exports.run = async (browser) => {
   for (var i = 0; i < infoTitle.length; i++) {
     info[infoTitle[i]] = infoValue[i]
   }
-  console.log(info)
+  data["info"] = info
 
   const description = await page.$eval('div.listing-description', element => element.textContent);
-  console.log('description: ' + description)
+  data["description"] = description
 
   const spaceUsage= await page.evaluate(() => Array.from(document.querySelectorAll('.listing-details-panel.project_types .parent-project-type'), element => element.textContent));
-  console.log('spaceUsage: ' + spaceUsage)
+  data["spaceUsage"] = spaceUsage
 
   const amenities = await page.evaluate(() => Array.from(document.querySelectorAll('.listing-information .listing-features'), element => element.textContent));
-  console.log('' + amenities)
+  data["amenities"] = amenities
 
   const lastUpdatedAt = await page.$eval('span.last-updated-date', element => element.textContent);
-  console.log('lastUpdatedAt: ' + lastUpdatedAt)
+  data["lastUpdatedAt"] = lastUpdatedAt
 
   const imgs = await page.evaluate(() => Array.from(document.querySelectorAll('div.sf-carousel.ng-isolate-scope .image'), (element) => { return getComputedStyle(element).backgroundImage.replace('url\(', '').replace(/\"/g, '').replace('\)', '') }));
-  console.log(imgs)
+  data["imgs"] = imgs
 
+  console.log(data)
   // Sample database connection and retrival. Same way can do rest of the operations
   (async () => {
       let connection, statement, rows;
