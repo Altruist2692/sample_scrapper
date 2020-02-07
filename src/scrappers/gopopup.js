@@ -39,19 +39,19 @@ exports.run = async (browser) => {
     Body: screenshot,
   }).promise();
 */
-  const title = await page.$eval('div.place-header-bar-left h1', element => element.textContent);
-  console.log(title)
+  const title = await page.$eval('div.place-header-bar-left h1', (element) => element.textContent);
+  console.log(title);
 
-  const pricingValue = await page.$eval('div.place-header-bar-right span.preu', element => element.textContent);
-  console.log('Pricing Value: ' + pricingValue)
+  const pricingValue = await page.$eval('div.place-header-bar-right span.preu', (element) => element.textContent);
+  console.log('Pricing Value: ' + pricingValue);
 
 
-  const description = await page.$eval('div#espacio', element => element.textContent);
-  console.log('description: ' + description)
+  const description = await page.$eval('div#espacio', (element) => element.textContent);
+  console.log('description: ' + description);
 
   // const amenities = await page.evaluate(() => Array.from(document.querySelectorAll(''), element => element));
-  const searchValue = await page.$$eval('p.title_apartat', els => els.length);
-  console.log(searchValue)
+  const searchValue = await page.$$eval('p.title_apartat', (els) => els.length);
+  console.log(searchValue);
   // await page.evaluate(() => {debugger;});
   // for (var i = 0; i < amenities.length; i++) {
   //   console.log(amenities[i].textContent)
@@ -99,5 +99,5 @@ exports.run = async (browser) => {
 
   await page.close();
   return 'done';
-  //To setup AWS Lambda schedule - https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html
+  // To setup AWS Lambda schedule - https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html
 };

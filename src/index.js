@@ -21,7 +21,7 @@ exports.run = async (browser) => {
     const result = await storefront.run(browser);
     return result;
   } catch (e) {
-    console.log("EXCEPTION CAUGHT:")
-    console.log(e)
+    console.log('EXCEPTION CAUGHT:');
+    console.log(e);
   }
-}
+};
