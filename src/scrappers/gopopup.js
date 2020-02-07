@@ -1,17 +1,12 @@
-const setup = require('./starter-kit/setup');
+const setup = require('../starter-kit/setup');
 const Database = require('database-js').Connection;
-
-const storefront = require('./scrappers/storefront');
-const gopopup = require('./scrappers/gopopup');
-const appearhere = require('./scrappers/appearhere');
 
 exports.handler = async (event, context, callback) => {
   // For keeping the browser launch
   context.callbackWaitsForEmptyEventLoop = false;
   const browser = await setup.getBrowser();
   try {
-    const result = await index.run(browser);
-    // const result = await exports.run(browser);
+    const result = await exports.run(browser);
     callback(null, result);
   } catch (e) {
     callback(e);
@@ -19,24 +14,13 @@ exports.handler = async (event, context, callback) => {
 };
 
 exports.run = async (browser) => {
-  // const browser = await setup.getBrowser();
-  try {
-    const result = await appearhere.run(browser);
-    // const result = await exports.run(browser);
-    // callback(null, result);
-    return 'done';
-  } catch (e) {
-    // callback(e);
-  }
-}
-// exports.run = async (browser) => {
-//   const page = await browser.newPage();
-//   await page.goto('https://www.thestorefront.com/spaces/united-states/new-york/new-york/28331-boutique-in-trendy-nolita',
-//   );
-//
-//   await Promise.all([
-//     page.waitForSelector('.title'),
-//   ]);
+  const page = await browser.newPage();
+  await page.goto('https://www.gopopup.com/en/berlin-berliner-innenstadt/pop-up/xdzph/',
+  );
+
+  await Promise.all([
+    page.waitForSelector('.place-header-bar-left'),
+  ]);
 
 /* screenshot
   await page.screenshot({path: '/tmp/screenshot.png'});
@@ -55,15 +39,29 @@ exports.run = async (browser) => {
     Body: screenshot,
   }).promise();
 */
-  // const title = await page.$eval('h1.title', element => element.textContent);
-  // console.log(title)
-  //
-  // const pricingValue = await page.$eval('span.pricing-value', element => element.textContent);
-  // console.log('Pricing Value: ' + pricingValue)
-  //
+  const title = await page.$eval('div.place-header-bar-left h1', element => element.textContent);
+  console.log(title)
+
+  const pricingValue = await page.$eval('div.place-header-bar-right span.preu', element => element.textContent);
+  console.log('Pricing Value: ' + pricingValue)
+
+
+  const description = await page.$eval('div#espacio', element => element.textContent);
+  console.log('description: ' + description)
+
+  // const amenities = await page.evaluate(() => Array.from(document.querySelectorAll(''), element => element));
+  const searchValue = await page.$$eval('p.title_apartat', els => els.length);
+  console.log(searchValue)
+  // await page.evaluate(() => {debugger;});
+  // for (var i = 0; i < amenities.length; i++) {
+  //   console.log(amenities[i].textContent)
+  // }
+  // const amenities = await page.evaluate(() => Array.from(document.querySelectorAll('.listing-information .listing-features'), element => element.textContent));
+  // console.log('' + amenities)
   // const location = await page.$eval('h2.location', element => element.textContent);
   // console.log('Location' + location)
-  //
+
+
   // const infoTitle= await page.evaluate(() => Array.from(document.querySelectorAll('div.listing-details-panel .listing-information .title'), element => element.textContent));
   // const infoValue = await page.evaluate(() => Array.from(document.querySelectorAll('div.listing-details-panel .listing-information .information'), element => element.textContent));
   // const info = {}
@@ -72,14 +70,10 @@ exports.run = async (browser) => {
   // }
   // console.log(info)
   //
-  // const description = await page.$eval('div.listing-description', element => element.textContent);
-  // console.log('description: ' + description)
   //
   // const spaceUsage= await page.evaluate(() => Array.from(document.querySelectorAll('.listing-details-panel.project_types .parent-project-type'), element => element.textContent));
   // console.log('spaceUsage: ' + spaceUsage)
   //
-  // const amenities = await page.evaluate(() => Array.from(document.querySelectorAll('.listing-information .listing-features'), element => element.textContent));
-  // console.log('' + amenities)
   //
   // const lastUpdatedAt = await page.$eval('span.last-updated-date', element => element.textContent);
   // console.log('lastUpdatedAt: ' + lastUpdatedAt)
@@ -103,8 +97,7 @@ exports.run = async (browser) => {
   //     }
   // })();
 
-  // await page.close();
-  // return 'done';
+  await page.close();
+  return 'done';
   //To setup AWS Lambda schedule - https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html
-// };
-//
+};
