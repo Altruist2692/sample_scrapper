@@ -45,9 +45,24 @@ exports.run = async (browser) => {
   const floorPlan = await page.$eval('a.Header__floorplan___2-I_c', (element) => element.href);
   data['floorPlan'] = floorPlan;
 
-  const imgs = await page.evaluate(() => Array.from(document.querySelectorAll('.slick-track img'), (element) => element.src));
-  data['imgs'] = imgs;
-  console.log(data);
+  const totl = await page.evaluate(() => Array.from(document.querySelectorAll('div.slick-slide'), (element) => element.dataset.index));
+  // console.log("totl" + totl)
+  console.log((totl.length+1) + "<<<<<<<<")
+  for (var i = 0; i < totl.length+1; i++) {
+    await page.click('.slick-next')
+    await page.waitFor(1000)
+  }
+  // await page.click()
+  const imgs = await page.$$eval('div.slick-track img', options => options.map((option) => {
+    a = []
+    a.push(option.src)
+    return a
+  }))
+
+  const filteredimg = imgs.filter((item, index) => imgs.indexOf(item) === index);
+  // const imgs = await page.evaluate(() => Array.from(document.querySelectorAll(''), (element) => element.src));
+  console.log("imgs " + filteredimg);
+  console.log("imgs length" + filteredimg.length)
   await page.close();
   return data;
   // To setup AWS Lambda schedule - https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html
