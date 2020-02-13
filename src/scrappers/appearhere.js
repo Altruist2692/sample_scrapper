@@ -1,6 +1,38 @@
 const setup = require('../starter-kit/setup');
 const Database = require('database-js').Connection;
 
+// [
+//   'https://www.appearhere.co.uk/spaces/columbia-road-shoreditch-the-little-black-boutique',
+//   'https://www.appearhere.co.uk/spaces/white-boxed-covent-garden-shop-neal-street',
+//   'https://www.appearhere.co.uk/spaces/peter-street-soho-the-corner-boutique-4311d4a1-f3d9-4797-9a1f-7cf347ebfcc5',
+//   'https://www.appearhere.co.uk/spaces/the-black-white-soho-shop-greek-street-a5fa79bb-3a3e-47e8-a7c6-018628d525e4',
+//   'https://www.appearhere.co.uk/spaces/the-oracle-reading-the-black-white-shop',
+//   'https://www.appearhere.co.uk/spaces/oracle-shopping-centre-reading-the-corner-boutique',
+//   'https://www.appearhere.co.uk/spaces/calvert-avenue-shoreditch-the-avenue-boutique',
+//   'https://www.appearhere.co.uk/spaces/bullring-birmingham-the-beauty-boutique',
+//   'https://www.appearhere.co.uk/spaces/davies-street-mayfair-the-mess-hall',
+//   'https://www.appearhere.co.uk/spaces/bullring-shopping-centre-birmingham-the-red-grey-shop',
+//   'https://www.appearhere.co.uk/spaces/the-arcade-bournemouth-the-grab-go-kiosk-space',
+//   'https://www.appearhere.co.uk/spaces/the-arcade-bournemouth-the-food-beverage-kiosk-space',
+//   'https://www.appearhere.co.uk/spaces/the-arcade-bournemouth-the-black-fashion-boutique',
+//   'https://www.appearhere.co.uk/spaces/the-arcade-bournemouth-the-blue-boutique',
+//   'https://www.appearhere.co.uk/spaces/upper-street-islington-the-brick-wall-boutique',
+//   'https://www.appearhere.co.uk/spaces/city-road-hoxton-the-marble-cafe',
+//   'https://www.appearhere.co.uk/spaces/lambs-conduit-bloomsbury-the-white-boutique',
+//   'https://www.appearhere.co.uk/spaces/mini-soho-store-greek-street',
+//   'https://www.appearhere.co.uk/spaces/brushfield-street-spitalfields-the-traditional-spitalfields-shop',
+//   'https://www.appearhere.co.uk/spaces/stoke-newington-white-box-space',
+//   'https://www.appearhere.co.uk/spaces/shoreditch-high-street-the-ace-corner-shop',
+//   'https://www.appearhere.co.uk/spaces/rose-street-covent-garden-the-double-level-shop',
+//   'https://www.appearhere.co.uk/spaces/shoreditch-industrial-event-space',
+//   'https://www.appearhere.co.uk/spaces/murray-grove-old-street-shop',
+//   'https://www.appearhere.co.uk/spaces/curtain-road-f-b-space-shoreditch',
+//   'https://www.appearhere.co.uk/spaces/hoxton-street-shoreditch-the-old-deli',
+//   'https://www.appearhere.co.uk/spaces/brewer-street-shop-soho',
+//   'https://www.appearhere.co.uk/spaces/brent-cross-london-the-glass-space',
+//   'https://www.appearhere.co.uk/spaces/high-street-wimbledon-wimbledon-the-white-shop',
+//   'https://www.appearhere.co.uk/spaces/berwick-street-soho-corner-boutique'
+// ]
 exports.run = async (browser) => {
   const page = await browser.newPage();
   await page.goto('https://www.appearhere.co.uk/spaces/columbia-road-shoreditch-the-little-black-boutique',

@@ -1,6 +1,49 @@
 const setup = require('../starter-kit/setup');
 const Database = require('database-js').Connection;
 
+// [
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/33988-white-box-showroom-in-chelsea',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/17656-spacious-gallery-in-arty-chelsea',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/26705-lower-east-side-gallery-space',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/34183-amazing-retail-and-gallery-space-i',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/32081-beautiful-white-box-in-tribeca',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/27512-luminous-soho-loft-showroom',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/brooklyn/33620-galleryevent-space-in-bushwick-bro',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/31255-chic-multi-purpose-venue-in-nomad',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/33674-charming-event-venue-in-chelsea',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/17638-lovely-studio-space-in-west-chelse',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35216-modern-loft-in-soho',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/33623-white-box-or-furnished-space-in-th',
+//   'https://www.thestorefront.com/listings/ref/35493',
+//   'https://www.thestorefront.com/listings/ref/35532',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35315-white-box-showroom-in-nomad',
+//   'https://www.thestorefront.com/listings/ref/35467',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/31709-minimalist-pop-up-in-nomad',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35316-boutique-space-on-broome-street',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35284-white-box-spacious-showroom-in-soh',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35455-19th-century-ground-floor-galleryr',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35256-hudson-rooftop-event-sapce',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35252-spacious-industrial-pop-up-space-i',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/34170-vanilla-box-on-greenwich-street',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35241-large-industrial-chic-event-space-',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/29213-amazing-pop-up-space-on-broadway',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35437-prime-and-spacious-tribeca-art-gal',
+//   'https://www.thestorefront.com/listings/ref/35441',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/28491-showroom-space-in-soho',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/27911-airy-midtown-loft',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35431-beautiful-large-loft-in-the-heart-',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/brooklyn/32393-white-box-studio-in-williamsburg',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/31636-compact-gallery-in-west-village',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35393-white-box-gallery-in-les',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35416-av-equipped-white-blank-space-in-t',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/35414-herald-square-amenity-space',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/34813-gallery-space-in-the-les',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/17694-lovely-pop-up-boutique-in-nolita',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/19758-pop-up-gallery-venue-in-chelsea',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/17609-stunning-pop-up-store-in-soho',
+//   'https://www.thestorefront.com/spaces/united-states/new-york/new-york/30175-vintage-tugboat'
+// ]
+
 exports.run = async (browser) => {
   const page = await browser.newPage();
   await page.goto('https://www.thestorefront.com/spaces/united-states/new-york/new-york/28331-boutique-in-trendy-nolita',

@@ -21,7 +21,7 @@ exports.handler = async (event, context, callback) => {
 
 exports.run = async (browser) => {
   try {
-    const result = await storefrontListing.run(browser);
+    const result = await gopopupListing.run(browser);
     return result;
   } catch (e) {
     console.log('EXCEPTION CAUGHT:');

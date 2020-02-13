@@ -1,6 +1,29 @@
 const setup = require('../starter-kit/setup');
 const Database = require('database-js').Connection;
 
+// [
+//   'https://www.gopopup.com/en/amsterdam-de-pijp/corporate-event/gzymf/',
+//   'https://www.gopopup.com/en/berlin-berliner-innenstadt/pop-up/xdzph/',
+//   'https://www.gopopup.com/en/paris-saint-gervais/pop-up/637z4/',
+//   'https://www.gopopup.com/en/berlin/pop-up/p14yr/',
+//   'https://www.gopopup.com/en/barcelona-el-parc-i-la-llacuna-del-poblenou/pop-up/7rdc5/',
+//   'https://www.gopopup.com/en/paris-les-halles/pop-up/6h5zk/',
+//   'https://www.gopopup.com/en/madrid-malasana/pop-up/64sk2/',
+//   'https://www.gopopup.com/en/lisboa/pop-up/xft6r/',
+//   'https://www.gopopup.com/en/amsterdam-grachtengordel/pop-up/pf75b/',
+//   'https://www.gopopup.com/en/amsterdam-amsterdam-oud-zuid/pop-up/pnv33/',
+//   'https://www.gopopup.com/en/amsterdam-amsterdam-oud-zuid/pop-up/sp5b3/',
+//   'https://www.gopopup.com/en/munchen/pop-up/qmxsq/',
+//   'https://www.gopopup.com/en/amsterdam-amsterdam-oud-zuid/pop-up/2drth/',
+//   'https://www.gopopup.com/en/munchen/pop-up/qxjsy/',
+//   'https://www.gopopup.com/en/berlin/pop-up/cp13t/',
+//   'https://www.gopopup.com/en/munchen/pop-up/16pqx/',
+//   'https://www.gopopup.com/en/barcelona-la-sagrada-familia/pop-up/mqkpt/',
+//   'https://www.gopopup.com/en/london-covent-garden/pop-up/t5h1z/',
+//   'https://www.gopopup.com/en/lisboa/pop-up/smsxz/',
+//   'https://www.gopopup.com/en/london-soho/pop-up/rrhv1/'
+// ]
+
 exports.run = async (browser) => {
   const page = await browser.newPage();
   await page.goto('https://www.gopopup.com/en/berlin-berliner-innenstadt/pop-up/xdzph/',
